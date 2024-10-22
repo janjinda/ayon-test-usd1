@@ -1,0 +1,28 @@
+#usda 1.0
+(
+    defaultPrim = "toy_box_03"
+    framesPerSecond = 25
+    metersPerUnit = 1
+    timeCodesPerSecond = 25
+    upAxis = "Y"
+)
+
+class "__class__"
+{
+    class "toy_box_03"
+    {
+    }
+}
+
+def Xform "toy_box_03" (
+    assetInfo = {
+        string identifier = "toy_box_03/toy_box_03.usd"
+        string name = "toy_box_03"
+    }
+    prepend inherits = </__class__/toy_box_03>
+    kind = "component"
+    prepend payload = @./payload.usd@
+)
+{
+}
+

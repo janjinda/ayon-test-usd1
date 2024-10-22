@@ -1,0 +1,255 @@
+#usda 1.0
+(
+    defaultPrim = "toy_box_03"
+    endTimeCode = 1001
+    framesPerSecond = 25
+    metersPerUnit = 1
+    startTimeCode = 1001
+    timeCodesPerSecond = 25
+    upAxis = "Y"
+)
+
+over "toy_box_xx"
+{
+    def Scope "mtl"
+    {
+        def Material "toy_box_03_mtl" (
+            prepend inherits = </__class_mtl__/toy_box_03_mtl>
+        )
+        {
+            token outputs:mtlx:displacement.connect = </toy_box_03/mtl/toy_box_03_mtl/mtlxdisplacement.outputs:out>
+            token outputs:mtlx:surface.connect = </toy_box_03/mtl/toy_box_03_mtl/mtlxstandard_surface.outputs:out>
+            token outputs:surface.connect = </toy_box_03/mtl/toy_box_03_mtl/mtlxstandard_preview.outputs:surface>
+
+            def Shader "mtlxstandard_surface"
+            {
+                uniform token info:id = "ND_standard_surface_surfaceshader"
+                float inputs:base (
+                    customData = {
+                        dictionary HoudiniPreviewTags = {
+                            double default_value = 1
+                            string ogl_diff_intensity = "1"
+                        }
+                    }
+                )
+                color3f inputs:base_color (
+                    customData = {
+                        dictionary HoudiniPreviewTags = {
+                            double3 default_value = (0.8, 0.8, 0.8)
+                            string ogl_diff = "1"
+                        }
+                    }
+                )
+                color3f inputs:base_color.connect = </toy_box_03/mtl/toy_box_03_mtl/mtlximage1.outputs:out>
+                float inputs:coat (
+                    customData = {
+                        dictionary HoudiniPreviewTags = {
+                            double default_value = 0
+                            string ogl_coat_intensity = "1"
+                        }
+                    }
+                )
+                float inputs:coat_roughness (
+                    customData = {
+                        dictionary HoudiniPreviewTags = {
+                            double default_value = 0.1
+                            string ogl_coat_rough = "1"
+                        }
+                    }
+                )
+                float inputs:emission (
+                    customData = {
+                        dictionary HoudiniPreviewTags = {
+                            double default_value = 0
+                            string ogl_emit_intensity = "1"
+                        }
+                    }
+                )
+                color3f inputs:emission_color (
+                    customData = {
+                        dictionary HoudiniPreviewTags = {
+                            double3 default_value = (1, 1, 1)
+                            string ogl_emit = "1"
+                        }
+                    }
+                )
+                float inputs:metalness (
+                    customData = {
+                        dictionary HoudiniPreviewTags = {
+                            double default_value = 0
+                            string ogl_metallic = "1"
+                        }
+                    }
+                )
+                float inputs:metalness.connect = </toy_box_03/mtl/toy_box_03_mtl/mtlximage2.outputs:out>
+                vector3f inputs:normal.connect = </toy_box_03/mtl/toy_box_03_mtl/mtlxnormalmap1.outputs:out>
+                float inputs:specular (
+                    customData = {
+                        dictionary HoudiniPreviewTags = {
+                            double default_value = 1
+                            string ogl_spec_intensity = "1"
+                        }
+                    }
+                )
+                color3f inputs:specular_color (
+                    customData = {
+                        dictionary HoudiniPreviewTags = {
+                            double3 default_value = (1, 1, 1)
+                            string ogl_spec = "1"
+                        }
+                    }
+                )
+                float inputs:specular_IOR (
+                    customData = {
+                        dictionary HoudiniPreviewTags = {
+                            double default_value = 1.5
+                            string ogl_ior = "1"
+                        }
+                    }
+                )
+                float inputs:specular_IOR.connect = </toy_box_03/mtl/toy_box_03_mtl/mtlximage4.outputs:out>
+                float inputs:specular_roughness (
+                    customData = {
+                        dictionary HoudiniPreviewTags = {
+                            double default_value = 0.2
+                            string ogl_rough = "1"
+                        }
+                    }
+                )
+                float inputs:specular_roughness.connect = </toy_box_03/mtl/toy_box_03_mtl/mtlximage3.outputs:out>
+                float inputs:transmission (
+                    customData = {
+                        dictionary HoudiniPreviewTags = {
+                            double default_value = 0
+                            string ogl_transparency = "1"
+                        }
+                    }
+                )
+                token outputs:out
+            }
+
+            def Shader "mtlximage1"
+            {
+                uniform token info:id = "ND_image_color3"
+                asset inputs:file = @./resources/toy_box03_surfaceColor.<UDIM>.exr@
+                color3f outputs:out
+            }
+
+            def Shader "mtlximage2"
+            {
+                uniform token info:id = "ND_image_color3"
+                asset inputs:file = @./resources/toy_box03_metallic.<UDIM>.exr@
+                color3f outputs:out
+            }
+
+            def Shader "mtlximage3"
+            {
+                uniform token info:id = "ND_image_color3"
+                asset inputs:file = @./resources/toy_box03_roughness.<UDIM>.exr@
+                color3f outputs:out
+            }
+
+            def Shader "mtlximage4"
+            {
+                uniform token info:id = "ND_image_color3"
+                asset inputs:file = @./resources/toy_box03_ior.<UDIM>.exr@
+                color3f outputs:out
+            }
+
+            def Shader "mtlxnormalmap1"
+            {
+                uniform token info:id = "ND_normalmap"
+                vector3f inputs:in.connect = </toy_box_03/mtl/toy_box_03_mtl/mtlximage5.outputs:out>
+                vector3f outputs:out
+            }
+
+            def Shader "mtlximage5"
+            {
+                uniform token info:id = "ND_image_color3"
+                asset inputs:file = @./resources/toy_box03_ntu.<UDIM>.exr@
+                color3f outputs:out
+            }
+
+            def Shader "mtlxdisplacement"
+            {
+                uniform token info:id = "ND_displacement_float"
+                token outputs:out
+            }
+
+            def Shader "mtlxstandard_preview" (
+                customData = {
+                    bool HoudiniIsAutoCreatedShader = 1
+                }
+            )
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                float inputs:clearcoatRoughness = 0.1
+                color3f inputs:diffuseColor = (0.8, 0.8, 0.8)
+                color3f inputs:diffuseColor.connect = </toy_box_03/mtl/toy_box_03_mtl/mtlxstandard_preview_texture_diffuseColor.outputs:rgb>
+                float inputs:roughness = 0.2
+                float inputs:roughness.connect = </toy_box_03/mtl/toy_box_03_mtl/mtlxstandard_preview_texture_roughness.outputs:r>
+                color3f inputs:specularColor = (1, 1, 1)
+                token outputs:surface
+            }
+
+            def Shader "mtlxstandard_preview_uv" (
+                customData = {
+                    bool HoudiniIsAutoCreatedShader = 1
+                }
+            )
+            {
+                uniform token info:id = "UsdPrimvarReader_float2"
+                float2 inputs:fallback = (0, 0)
+                token inputs:varname = "st"
+                float2 outputs:result
+            }
+
+            def Shader "mtlxstandard_preview_texture_diffuseColor" (
+                customData = {
+                    bool HoudiniIsAutoCreatedShader = 1
+                }
+            )
+            {
+                uniform token info:id = "UsdUVTexture"
+                asset inputs:file = @./resources/toy_box03_surfaceColor.<UDIM>.exr@
+                float2 inputs:st.connect = </toy_box_03/mtl/toy_box_03_mtl/mtlxstandard_preview_uv.outputs:result>
+                color3f outputs:rgb
+            }
+
+            def Shader "mtlxstandard_preview_texture_roughness" (
+                customData = {
+                    bool HoudiniIsAutoCreatedShader = 1
+                }
+            )
+            {
+                uniform token info:id = "UsdUVTexture"
+                asset inputs:file = @./resources/toy_box03_roughness.<UDIM>.exr@
+                float2 inputs:st.connect = </toy_box_03/mtl/toy_box_03_mtl/mtlxstandard_preview_uv.outputs:result>
+                float outputs:r
+            }
+        }
+    }
+
+    over "geo" (
+        prepend apiSchemas = ["MaterialBindingAPI"]
+    )
+    {
+        rel material:binding = </toy_box_03/mtl/toy_box_03_mtl>
+
+        over "box01_M_geo"
+        {
+            token subdivisionScheme = "catmullClark"
+        }
+
+        over "bracing01_M_geo"
+        {
+            token subdivisionScheme = "catmullClark"
+        }
+
+        over "lid01_M_geo"
+        {
+            token subdivisionScheme = "catmullClark"
+        }
+    }
+}
+

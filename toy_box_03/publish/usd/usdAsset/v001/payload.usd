@@ -1,0 +1,10 @@
+#usda 1.0
+(
+    defaultPrim = "toy_box_03"
+    metersPerUnit = 1
+    subLayers = [
+        @D:\ayon\projects\USD1\toy_box_03\publish\usd\usdAsset_model\v001\usd1_toy_box_03_usdAsset_model_v001.usd:SDF_FORMAT_ARGS:layer_id=model&order=100@
+    ]
+    upAxis = "Y"
+)
+

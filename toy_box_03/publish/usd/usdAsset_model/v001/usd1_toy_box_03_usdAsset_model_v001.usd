@@ -1,0 +1,30 @@
+#usda 1.0
+(
+    defaultPrim = "toy_box_03"
+    metersPerUnit = 1
+    upAxis = "Y"
+)
+
+def Xform "toy_box_03" (
+    variants = {
+        string model = "Main"
+    }
+    prepend variantSets = "model"
+)
+{
+    variantSet "model" = {
+        "Main" (
+            prepend references = [
+                @D:\ayon\projects\USD1\toy_box_03\publish\usd\usdMain\v001\usd1_toy_box_03_usdMain_v001.usd@ (
+                    customData = {
+                        int ayon_order = 100
+                        string ayon_uri = "ayon://USD1//toy_box_03?product=usdMain&version=1&representation=usd"
+                    }
+                )
+            ]
+        ) {
+
+        }
+    }
+}
+
